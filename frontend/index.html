@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Safe Roads - Accident Risk Predictor</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <div class="language-section">
+        <div class="language-label" data-i18n="choose_language">Choose a language</div>
+        <div class="language-toggle">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <span class="lang-separator">|</span>
+          <button class="lang-btn" data-lang="he">עברית</button>
+        </div>
+      </div>
+      <h1 data-i18n="title">Safe Roads</h1>
+      <p class="subtitle" data-i18n="subtitle">Real-time Accident Risk Assessment</p>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="content">
+      <section class="input-section">
+        <h2 data-i18n="driving_conditions">Driving Conditions</h2>
+        <p class="section-desc" data-i18n="select_conditions">Select your current driving conditions to get an instant risk assessment.</p>
+
+        <form class="input-form">
+          <div class="input-grid">
+            <div class="input-group">
+              <label for="road_type" data-i18n="road_type">Road Type</label>
+              <select id="road_type">
+                <option value="urban" data-i18n="urban">Urban</option>
+                <option value="highway" data-i18n="highway">Highway</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label for="weather" data-i18n="weather">Weather</label>
+              <select id="weather">
+                <option value="clear" data-i18n="clear">Clear</option>
+                <option value="rain" data-i18n="rain">Rain</option>
+                <option value="fog" data-i18n="fog">Fog</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label for="time_of_day" data-i18n="time_of_day">Time of Day</label>
+              <select id="time_of_day">
+                <option value="day" data-i18n="day">Day</option>
+                <option value="night" data-i18n="night">Night</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label for="lighting" data-i18n="lighting">Lighting</label>
+              <select id="lighting">
+                <option value="daylight" data-i18n="daylight">Daylight</option>
+                <option value="dark_with_streetlights" data-i18n="dark_streetlights">Dark (streetlights)</option>
+                <option value="dark_no_streetlights" data-i18n="dark_no_streetlights">Dark (no streetlights)</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label for="junction" data-i18n="junction">Junction</label>
+              <select id="junction">
+                <option value="no_junction" data-i18n="no_junction">No junction</option>
+                <option value="junction" data-i18n="junction_area">Junction area</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label for="road_surface" data-i18n="road_surface">Road Surface</label>
+              <select id="road_surface">
+                <option value="dry" data-i18n="dry">Dry</option>
+                <option value="wet" data-i18n="wet">Wet</option>
+                <option value="unknown" data-i18n="unknown">Unknown</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button id="btn" type="button" class="predict-btn">
+              <span class="btn-text" data-i18n="predict_risk">Predict Risk</span>
+              <span class="btn-loading" style="display: none;" data-i18n="analyzing">Analyzing...</span>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="result-section">
+        <h2 data-i18n="risk_assessment">Risk Assessment</h2>
+        <div class="result-content-wrapper">
+          <div class="result-card" id="resultCard">
+            <div class="result-header">
+              <div class="risk-display">
+                <div class="risk-percentage" id="riskText">—</div>
+                <div class="risk-label" data-i18n="risk_level">Risk Level</div>
+              </div>
+              <div class="risk-badge" id="riskBadge" data-i18n="ready">Ready</div>
+            </div>
+
+            <div class="risk-meter">
+              <div class="meter-label">
+                <span data-i18n="low_risk">Low Risk</span>
+                <span data-i18n="high_risk">High Risk</span>
+              </div>
+              <div class="meter-bar">
+                <div class="meter-fill" id="riskBar"></div>
+              </div>
+            </div>
+
+            <div class="result-content">
+              <div class="advice-section">
+                <h3 data-i18n="recommendation">Recommendation</h3>
+                <p id="advice" class="advice-text" data-i18n="select_conditions_advice">Select your driving conditions and click "Predict Risk" to get personalized safety recommendations.</p>
+              </div>
+
+              <div class="breakdown-section">
+                <h3 data-i18n="risk_factors">Risk Factors</h3>
+                <div id="explain" class="breakdown-text"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="error-message" id="errorText" style="display: none;">
+            <div class="error-icon">⚠️</div>
+            <div class="error-content">
+              <h3 data-i18n="unable_calculate">Unable to Calculate Risk</h3>
+              <p data-i18n="check_connection">Please check your connection and try again.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>API Endpoint: <code>/predict</code> (same-origin)</p>
+      <p class="footer-note">This is a demonstration tool for educational purposes.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
