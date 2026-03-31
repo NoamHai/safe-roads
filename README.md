@@ -97,19 +97,18 @@ pytest --cov=backend --cov-report=html
 ### Manual Testing
 1. Start the application as described above
 2. Test various combinations of:
-   - Road types: Urban, Highway
-   - Weather: Clear, Rain, Fog
-   - Time of day: Day, Night
-   - Lighting: Daylight, Dark with/without streetlights
-   - Junction: No junction, Junction
-   - Road surface: Dry, Wet, Unknown
+  - Hour: 0-23
+  - Month: 1-12
+  - Accident type: encoded integer (or mapped category key)
+  - Speed limit: encoded integer (or mapped category key)
+  - District (optional): encoded integer (or mapped category key)
 
 ### API Testing
 ```powershell
 # Test the prediction endpoint directly
 curl -X POST "http://127.0.0.1:8000/predict" ^
   -H "Content-Type: application/json" ^
-  -d "{\"road_type\":\"urban\",\"weather\":\"clear\",\"time_of_day\":\"day\",\"lighting\":\"daylight\",\"junction\":\"no_junction\",\"road_surface\":\"dry\"}"
+  -d "{\"hour\":8,\"month\":5,\"accident_type\":2,\"speed_limit\":3}"
 ```
 
 ### Automated Testing (Development)
@@ -193,12 +192,11 @@ Predicts accident risk based on driving conditions.
 **Request Body:**
 ```json
 {
-  "road_type": "urban|highway",
-  "weather": "clear|rain|fog",
-  "time_of_day": "day|night",
-  "lighting": "daylight|dark_with_streetlights|dark_no_streetlights",
-  "junction": "no_junction|junction",
-  "road_surface": "dry|wet|unknown"
+  "hour": 8,
+  "month": 5,
+  "accident_type": 2,
+  "speed_limit": 3,
+  "district": 7
 }
 ```
 
