@@ -8,17 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <style>
-    .advice-text .lang-en,
-    .advice-text .lang-he {
-      display: none;
-    }
-
-    html[lang="en"] .advice-text .lang-en,
-    html[lang="he"] .advice-text .lang-he {
-      display: inline;
-    }
-  </style>
 </head>
 <body>
   <header class="header">
@@ -228,7 +217,7 @@
           <div class="form-actions">
             <button id="btn" type="button" class="predict-btn">
               <span class="btn-text" data-i18n="predict_risk">Predict Risk</span>
-              <span class="btn-loading" style="display: none;" data-i18n="analyzing">Analyzing...</span>
+              <span class="btn-loading hidden" data-i18n="analyzing">Analyzing...</span>
             </button>
           </div>
         </form>
@@ -273,7 +262,7 @@
             <div class="result-content">
               <div class="advice-section">
                 <h3 data-i18n="recommendation">Recommendation</h3>
-                <p id="advice" class="advice-text"><span class="lang-en">Select your driving conditions and click "Predict Risk" to get personalized safety recommendations.</span><span class="lang-he">בחר את תנאי הנהיגה ולחץ על "חשב סיכון" כדי לקבל המלצות בטיחות מותאמות אישית.</span></p>
+                <p id="advice" class="advice-text">Select your driving conditions and click "Predict Risk" to get personalized safety recommendations.</p>
               </div>
 
               <div class="breakdown-section">
@@ -283,7 +272,7 @@
             </div>
           </div>
 
-          <div class="error-message" id="errorText" style="display: none;">
+          <div class="error-message hidden" id="errorText">
             <div class="error-icon">⚠️</div>
             <div class="error-content">
               <h3 data-i18n="unable_calculate">Unable to Calculate Risk</h3>

@@ -1,569 +1,609 @@
-// Internationalization dictionary
 const i18n = {
   en: {
-    // Header
     choose_language: "Choose a language",
     title: "Safe Roads",
     subtitle: "Real-time Accident Risk Assessment",
-    
-    // Input section
     driving_conditions: "Driving Conditions",
     select_conditions: "Select your current driving conditions to get an instant risk assessment.",
-    road_type: "Road Type",
-    urban: "Urban",
-    highway: "Highway",
-    weather: "Weather",
-    clear: "Clear",
-    rain: "Rain",
-    fog: "Fog",
-    time_of_day: "Time of Day",
-    day: "Day",
-    night: "Night",
-    lighting: "Lighting",
-    daylight: "Daylight",
-    dark_streetlights: "Dark (streetlights)",
-    dark_no_streetlights: "Dark (no streetlights)",
-    junction: "Junction",
-    no_junction: "No junction",
-    junction_area: "Junction area",
-    road_surface: "Road Surface",
-    dry: "Dry",
-    wet: "Wet",
-    unknown: "Unknown",
+    section_time_location: "Time & Location",
+    section_road_conditions: "Road Conditions",
+    section_accident_details: "Accident Details",
+    label_SHAA: "Hour",
+    label_HODESH_TEUNA: "Month",
+    label_YOM_BASHAVUA: "Day of Week",
+    label_ZURAT_ISHUV: "Settlement Type",
+    label_NAFA: "Traffic Density",
+    label_ROAD_STRUCTURE: "Road Structure",
+    label_ROHAV: "Road Width",
+    label_MEHIRUT_MUTERET: "Speed Limit",
+    label_TEURA: "Driving Manner",
+    label_SUG_DEREH: "Road Type",
+    label_PNE_KVISH: "Road Surface",
+    label_TKINUT: "Weather",
+    label_SUG_TEUNA: "Accident Type",
+    label_SIMUN_TIMRUR: "Traffic Marking",
+    label_MEKOM_HAZIYA: "Crossing Location",
+    label_OFEN_HAZIYA: "Crossing Method",
     predict_risk: "Predict Risk",
     analyzing: "Analyzing...",
-    
-    // Result section
     risk_assessment: "Risk Assessment",
     risk_level: "Risk Level",
     ready: "Ready",
     low_risk: "Low Risk",
+    medium_risk_label: "Medium Risk",
     high_risk: "High Risk",
+    light_accident: "Light Accident",
+    dangerous_accident: "Dangerous Accident",
     recommendation: "Recommendation",
-    select_conditions_advice: "Select your driving conditions and click \"Predict Risk\" to get personalized safety recommendations.",
     risk_factors: "Risk Factors",
-    
-    // Dynamic text
-    calculating: "Calculating prediction…",
+    select_conditions_advice: "Select your driving conditions and click \"Predict Risk\" to get personalized safety recommendations.",
+    calculating: "Calculating prediction...",
     why_this_risk: "Why this risk?",
-    error_prediction: "Could not get prediction. Make sure the backend is running.",
-    error: "Error",
-    
-    // Risk levels
     low_risk_label: "Low risk",
-    medium_risk_label: "Medium risk", 
     high_risk_label: "High risk",
     low: "Low",
     medium: "Medium",
     high: "High",
-    
-    // Advice
+    error: "Error",
     low_risk_advice: "Low risk. Drive normally and stay alert.",
     medium_risk_advice: "Medium risk. Reduce speed and stay focused.",
     high_risk_advice: "High risk. Drive carefully and avoid distractions.",
-    
-    // Error messages
     unable_calculate: "Unable to Calculate Risk",
     check_connection: "Please check your connection and try again.",
     network_error: "Network connection failed. Please check if the backend server is running.",
     server_error: "Server error occurred. Please try again later.",
     invalid_response: "Received invalid response from server.",
-
-    // Factor labels for risk breakdown
-    factor_road_type: "Road Type",
-    factor_weather: "Weather", 
-    factor_time_of_day: "Time of Day",
-    factor_lighting: "Lighting",
-    factor_junction: "Junction",
-    factor_road_surface: "Road Surface",
-
-    // Factor values
-    value_urban: "Urban",
-    value_highway: "Highway",
-    value_clear: "Clear",
-    value_rain: "Rain", 
-    value_fog: "Fog",
-    value_day: "Day",
-    value_night: "Night",
-    value_daylight: "Daylight",
-    value_dark_streetlights: "Dark (streetlights)",
-    value_dark_no_streetlights: "Dark (no streetlights)",
-    value_no_junction: "No junction",
-    value_junction_area: "Junction area",
-    value_dry: "Dry",
-    value_wet: "Wet",
-    value_unknown: "Unknown"
+    factor_hour: "Hour",
+    factor_month: "Month",
+    factor_accident_type: "Accident Type",
+    factor_speed_limit: "Speed Limit",
+    factor_district: "District"
   },
   he: {
-    // Header
     choose_language: "בחר שפה",
     title: "כבישים בטוחים",
     subtitle: "הערכת סיכון תאונות בזמן אמת",
-    
-    // Input section
     driving_conditions: "תנאי נהיגה",
     select_conditions: "בחר את תנאי הנהיגה הנוכחיים שלך כדי לקבל הערכת סיכון מיידית.",
-    road_type: "סוג כביש",
-    urban: "עירוני",
-    highway: "כביש מהיר",
-    weather: "מזג אוויר",
-    clear: "בהיר",
-    rain: "גשם",
-    fog: "ערפל",
-    time_of_day: "זמן ביום",
-    day: "יום",
-    night: "לילה",
-    lighting: "תאורה",
-    daylight: "אור יום",
-    dark_streetlights: "חושך (עם פנסי רחוב)",
-    dark_no_streetlights: "חושך (ללא פנסי רחוב)",
-    junction: "צומת",
-    no_junction: "אין צומת",
-    junction_area: "אזור צומת",
-    road_surface: "מצב הכביש",
-    dry: "יבש",
-    wet: "רטוב",
-    unknown: "לא ידוע",
+    section_time_location: "זמן ומיקום",
+    section_road_conditions: "תנאי הדרך",
+    section_accident_details: "פרטי התאונה",
+    label_SHAA: "שעה",
+    label_HODESH_TEUNA: "חודש",
+    label_YOM_BASHAVUA: "יום בשבוע",
+    label_ZURAT_ISHUV: "סוג יישוב",
+    label_NAFA: "עומס תנועה",
+    label_ROAD_STRUCTURE: "מבנה הדרך",
+    label_ROHAV: "רוחב כביש",
+    label_MEHIRUT_MUTERET: "מהירות מותרת",
+    label_TEURA: "אופן נהיגה",
+    label_SUG_DEREH: "סוג דרך",
+    label_PNE_KVISH: "מצב פני הכביש",
+    label_TKINUT: "מזג אוויר",
+    label_SUG_TEUNA: "סוג תאונה",
+    label_SIMUN_TIMRUR: "סימון תנועה",
+    label_MEKOM_HAZIYA: "מיקום חצייה",
+    label_OFEN_HAZIYA: "אופן חצייה",
     predict_risk: "חשב סיכון",
     analyzing: "מחשב...",
-    
-    // Result section
     risk_assessment: "הערכת סיכון",
     risk_level: "רמת סיכון",
     ready: "מוכן",
     low_risk: "סיכון נמוך",
-    high_risk: "סיכון גבוה",
-    recommendation: "המלצה",
-    select_conditions_advice: "בחר את תנאי הנהיגה שלך ולחץ על \"חשב סיכון\" כדי לקבל המלצות בטיחות מותאמות אישית.",
-    risk_factors: "גורמי סיכון",
-    
-    // Dynamic text
-    calculating: "מחשב הערכה…",
-    why_this_risk: "למה סיכון זה?",
-    error_prediction: "לא ניתן לקבל הערכה. וודא שהשרת פועל.",
-    error: "שגיאה",
-    
-    // Risk levels
-    low_risk_label: "סיכון נמוך",
     medium_risk_label: "סיכון בינוני",
+    high_risk: "סיכון גבוה",
+    light_accident: "תאונה קלה",
+    dangerous_accident: "תאונה מסוכנת",
+    recommendation: "המלצה",
+    risk_factors: "גורמי סיכון",
+    select_conditions_advice: "בחר את תנאי הנהיגה ולחץ על \"חשב סיכון\" כדי לקבל המלצות בטיחות מותאמות אישית.",
+    calculating: "מחשב הערכה...",
+    why_this_risk: "למה הסיכון הזה?",
+    low_risk_label: "סיכון נמוך",
     high_risk_label: "סיכון גבוה",
     low: "נמוך",
     medium: "בינוני",
     high: "גבוה",
-    
-    // Advice
-    low_risk_advice: "סיכון נמוך. נהג כרגיל והישאר ערני.",
-    medium_risk_advice: "סיכון בינוני. האט את המהירות והתמקד.",
-    high_risk_advice: "סיכון גבוה. נהג בזהירות והימנע מהסחות דעת.",
-    
-    // Error messages
+    error: "שגיאה",
+    low_risk_advice: "הסיכון נמוך. נהג כרגיל והישאר ערני.",
+    medium_risk_advice: "הסיכון בינוני. האט ושמור על ריכוז.",
+    high_risk_advice: "הסיכון גבוה. נהג בזהירות והימנע מהסחות דעת.",
     unable_calculate: "לא ניתן לחשב סיכון",
-    check_connection: "אנא בדוק את החיבור שלך ונסה שוב.",
-    network_error: "החיבור לרשת נכשל. אנא בדוק אם שרת ה-backend פועל.",
-    server_error: "אירעה שגיאת שרת. אנא נסה שוב מאוחר יותר.",
+    check_connection: "אנא בדוק את החיבור ונסה שוב.",
+    network_error: "חיבור הרשת נכשל. בדוק אם שרת ה-backend פועל.",
+    server_error: "אירעה שגיאת שרת. נסה שוב מאוחר יותר.",
     invalid_response: "התקבלה תגובה לא תקינה מהשרת.",
-
-    // Factor labels for risk breakdown
-    factor_road_type: "סוג כביש",
-    factor_weather: "מזג אוויר",
-    factor_time_of_day: "זמן ביום",
-    factor_lighting: "תאורה",
-    factor_junction: "צומת",
-    factor_road_surface: "מצב הכביש",
-
-    // Factor values
-    value_urban: "עירוני",
-    value_highway: "כביש מהיר",
-    value_clear: "בהיר",
-    value_rain: "גשם",
-    value_fog: "ערפל",
-    value_day: "יום",
-    value_night: "לילה",
-    value_daylight: "אור יום",
-    value_dark_streetlights: "חושך (עם פנסי רחוב)",
-    value_dark_no_streetlights: "חושך (ללא פנסי רחוב)",
-    value_no_junction: "אין צומת",
-    value_junction_area: "אזור צומת",
-    value_dry: "יבש",
-    value_wet: "רטוב",
-    value_unknown: "לא ידוע"
+    factor_hour: "שעה",
+    factor_month: "חודש",
+    factor_accident_type: "סוג תאונה",
+    factor_speed_limit: "מהירות מותרת",
+    factor_district: "מחוז"
   }
 };
 
-// Language management functions
-function setLanguage(lang) {
-  if (!i18n[lang]) {
-    console.error(`Language '${lang}' not found`);
-    return;
+function buildHourOptions() {
+  const rows = [];
+  for (let hour = 0; hour <= 23; hour += 1) {
+    const label = `${String(hour).padStart(2, "0")}:00`;
+    rows.push({ value: String(hour), en: label, he: label });
   }
-  
-  // Update HTML attributes
-  document.documentElement.lang = lang;
-  document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
-  
-  // Update all elements with data-i18n
-  document.querySelectorAll('[data-i18n]').forEach(element => {
-    const key = element.getAttribute('data-i18n');
+  return rows;
+}
+
+function buildMonthOptions() {
+  const rows = [];
+  for (let month = 1; month <= 12; month += 1) {
+    rows.push({ value: String(month), en: String(month), he: String(month) });
+  }
+  return rows;
+}
+
+const selectOptions = {
+  SHAA: buildHourOptions(),
+  HODESH_TEUNA: buildMonthOptions(),
+  YOM_BASHAVUA: [
+    { value: "0", en: "Unknown", he: "לא ידוע" },
+    { value: "1", en: "Sunday", he: "ראשון" },
+    { value: "2", en: "Monday", he: "שני" },
+    { value: "3", en: "Tuesday", he: "שלישי" },
+    { value: "4", en: "Wednesday", he: "רביעי" },
+    { value: "5", en: "Thursday", he: "חמישי" },
+    { value: "6", en: "Friday", he: "שישי" },
+    { value: "7", en: "Saturday", he: "שבת" }
+  ],
+  ZURAT_ISHUV: [
+    { value: "0", en: "Unknown", he: "לא ידוע" },
+    { value: "1", en: "Urban", he: "עירוני" },
+    { value: "2", en: "Rural", he: "כפרי" },
+    { value: "3", en: "Main Road", he: "כביש ראשי" }
+  ],
+  NAFA: [
+    { value: "0", en: "Unknown", he: "לא ידוע" },
+    { value: "1", en: "Light", he: "קל" },
+    { value: "2", en: "Medium", he: "בינוני" },
+    { value: "3", en: "Heavy", he: "כבד" }
+  ],
+  ROAD_STRUCTURE: [
+    { value: "0", en: "Unknown", he: "לא ידוע" },
+    { value: "1", en: "One-way", he: "חד-כיווני" },
+    { value: "2", en: "Two-way", he: "דו-כיווני" },
+    { value: "3", en: "Multi-lane Two-way", he: "רב-נתיבים דו-כיווני" },
+    { value: "4", en: "Multi-lane One-way", he: "רב-נתיבים חד-כיווני" }
+  ],
+  ROHAV: [
+    { value: "0", en: "Unknown", he: "לא ידוע" },
+    { value: "1", en: "Narrow (<=6.5m)", he: "צר (עד 6.5 מ')" },
+    { value: "2", en: "Medium (6.5-8m)", he: "בינוני (6.5-8 מ')" },
+    { value: "3", en: "Wide (>8m)", he: "רחב (מעל 8 מ')" }
+  ],
+  MEHIRUT_MUTERET: [
+    { value: "0", en: "Unknown", he: "לא ידוע" },
+    { value: "1", en: "Up to 50 km/h", he: "עד 50 קמ״ש" },
+    { value: "2", en: "Up to 60 km/h", he: "עד 60 קמ״ש" },
+    { value: "3", en: "Up to 70 km/h", he: "עד 70 קמ״ש" },
+    { value: "4", en: "Up to 80 km/h", he: "עד 80 קמ״ש" },
+    { value: "5", en: "Up to 90 km/h", he: "עד 90 קמ״ש" },
+    { value: "6", en: "Up to 100 km/h", he: "עד 100 קמ״ש" },
+    { value: "7", en: "Up to 110 km/h", he: "עד 110 קמ״ש" },
+    { value: "8", en: "Up to 120 km/h", he: "עד 120 קמ״ש" }
+  ],
+  TEURA: [
+    { value: "0", en: "Unknown", he: "לא ידוע" },
+    { value: "1", en: "Careful", he: "זהיר" },
+    { value: "2", en: "Normal", he: "נורמלי" },
+    { value: "3", en: "Rushed", he: "חפוז" },
+    { value: "4", en: "Dangerous", he: "מסוכן" }
+  ],
+  SUG_DEREH: [
+    { value: "0", en: "Unknown", he: "לא ידוע" },
+    { value: "1", en: "Urban at Junction", he: "עירוני בצומת" },
+    { value: "2", en: "Urban not at Junction", he: "עירוני לא בצומת" },
+    { value: "3", en: "Non-urban at Junction", he: "לא עירוני בצומת" },
+    { value: "4", en: "Non-urban not at Junction", he: "לא עירוני לא בצומת" }
+  ],
+  PNE_KVISH: [
+    { value: "0", en: "Unknown", he: "לא ידוע" },
+    { value: "1", en: "Dry", he: "יבש" },
+    { value: "2", en: "Wet", he: "רטוב ממים" },
+    { value: "3", en: "Fuel on Surface", he: "מרוח בחומר דלק" },
+    { value: "4", en: "Mud", he: "מכוסה בבוץ" }
+  ],
+  TKINUT: [
+    { value: "0", en: "Unknown", he: "לא ידוע" },
+    { value: "1", en: "Clear", he: "בהיר" },
+    { value: "2", en: "Cloudy", he: "מעונן" },
+    { value: "3", en: "Rainy", he: "גשום" },
+    { value: "4", en: "Foggy", he: "ערפילי" }
+  ],
+  SUG_TEUNA: [
+    { value: "0", en: "Unknown", he: "לא ידוע" },
+    { value: "1", en: "Frontal", he: "חזיתי" },
+    { value: "2", en: "Rear-end", he: "אחורי" },
+    { value: "3", en: "Side", he: "צדדי" },
+    { value: "4", en: "Pedestrian", he: "הולך רגל" }
+  ],
+  SIMUN_TIMRUR: [
+    { value: "0", en: "Unknown", he: "לא ידוע" },
+    { value: "1", en: "Traffic Light", he: "בעל רמזור" },
+    { value: "2", en: "Traffic Sign", he: "בעל תמרור" },
+    { value: "3", en: "No Marking", he: "ללא סימונים" }
+  ],
+  MEKOM_HAZIYA: [
+    { value: "0", en: "Unknown", he: "לא ידוע" },
+    { value: "1", en: "Road Center", he: "מרכז כביש" },
+    { value: "2", en: "Road Side", he: "שיץ כביש" },
+    { value: "3", en: "Parking", he: "חניה" },
+    { value: "4", en: "Sidewalk", he: "מדרכה" }
+  ],
+  OFEN_HAZIYA: [
+    { value: "0", en: "Unknown", he: "לא ידוע" },
+    { value: "1", en: "Collision", he: "תאונה" },
+    { value: "2", en: "Rollover", he: "התהפכות" },
+    { value: "3", en: "Leaving Road", he: "יציאה מכביש" },
+    { value: "4", en: "Other", he: "התחזקות" }
+  ]
+};
+
+let lastBreakdownData = [];
+let lastProbability = null;
+
+function getCurrentLanguage() {
+  return document.documentElement.lang === "he" ? "he" : "en";
+}
+
+function getApiEndpoint() {
+  const currentPort = window.location.port;
+  const currentHost = window.location.hostname;
+  if (currentPort === "8000") {
+    return "/predict";
+  }
+  return `http://${currentHost}:8001/predict`;
+}
+
+function applyI18nText(lang) {
+  document.querySelectorAll("[data-i18n]").forEach((element) => {
+    const key = element.getAttribute("data-i18n");
     if (i18n[lang][key]) {
       element.textContent = i18n[lang][key];
     }
   });
-  
-  // Update language toggle buttons
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+}
+
+function renderOptionsForSelect(selectId, lang) {
+  const select = document.getElementById(selectId);
+  const options = selectOptions[selectId];
+  if (!select || !options) {
+    return;
+  }
+
+  const currentValue = select.value;
+  select.innerHTML = "";
+
+  options.forEach((item) => {
+    const option = document.createElement("option");
+    option.value = item.value;
+    const englishText = String(item.en ?? "").split("/")[0].trim();
+    const hebrewText = String(item.he ?? "").split("/").pop().trim();
+    option.textContent = lang === "he" ? (hebrewText || englishText) : (englishText || hebrewText);
+    select.appendChild(option);
   });
-  
-  // Update dynamic content if it exists
-  updateDynamicContent();
-  
-  // Save to localStorage
-  localStorage.setItem('ui_language', lang);
-  
-  console.log(`Language set to: ${lang}`);
+
+  const hasPrevious = options.some((item) => item.value === currentValue);
+  if (hasPrevious) {
+    select.value = currentValue;
+  } else if (selectId === "HODESH_TEUNA") {
+    select.value = String(new Date().getMonth() + 1);
+  } else if (selectId === "SHAA") {
+    select.value = String(new Date().getHours());
+  }
 }
 
-// Function to get friendly factor display
-function getFactorDisplay(factor, value, delta, lang) {
-  const factorLabelKey = `factor_${factor}`;
-  const valueKey = `value_${value}`;
-  
-  const label = i18n[lang][factorLabelKey] || factor;
-  const displayValue = i18n[lang][valueKey] || value;
-  const deltaPercent = Math.round(delta * 100);
-  
-  return {
-    label: label,
-    value: displayValue,
-    impact: deltaPercent
-  };
+function renderAllSelectOptions(lang) {
+  Object.keys(selectOptions).forEach((selectId) => renderOptionsForSelect(selectId, lang));
+  updateSelectVisualState();
 }
 
-// Function to render breakdown factors
+function updateSelectVisualState() {
+  document.querySelectorAll(".input-group select").forEach((select) => {
+    const hasValue = String(select.value || "").trim() !== "";
+    select.classList.toggle("is-selected", hasValue);
+  });
+}
+
+function classifyRisk(probability) {
+  const lang = getCurrentLanguage();
+  if (probability < 0.33) {
+    return { label: i18n[lang].low_risk_label, badge: i18n[lang].low, cssClass: "risk-low", color: "#2e7d32" };
+  }
+  if (probability < 0.66) {
+    return { label: i18n[lang].medium_risk_label, badge: i18n[lang].medium, cssClass: "risk-medium", color: "#ed6c02" };
+  }
+  return { label: i18n[lang].high_risk_label, badge: i18n[lang].high, cssClass: "risk-high", color: "#d32f2f" };
+}
+
+function setAdvice(probability) {
+  const lang = getCurrentLanguage();
+  if (probability < 0.33) {
+    return i18n[lang].low_risk_advice;
+  }
+  if (probability < 0.66) {
+    return i18n[lang].medium_risk_advice;
+  }
+  return i18n[lang].high_risk_advice;
+}
+
 function renderBreakdown(breakdown) {
   const explainDiv = document.getElementById("explain");
-  const lang = document.documentElement.lang || 'en';
-  
+  if (!explainDiv) {
+    return;
+  }
+
+  const lang = getCurrentLanguage();
   explainDiv.innerHTML = `<div class="risk-factors-title">${i18n[lang].why_this_risk}</div>`;
-  
-  const factorsList = document.createElement('div');
-  factorsList.className = 'risk-factors-list';
-  
-  breakdown
-    .filter(item => item && typeof item === "object")
-    .forEach(item => {
-      const factor = safeToString(item.factor, "unknown");
-      const value = safeToString(item.value, "unknown");
-      const delta = safeToNumber(item.delta, 0);
-      
-      const display = getFactorDisplay(factor, value, delta, lang);
-      
-      const factorItem = document.createElement('div');
-      factorItem.className = 'risk-factor-item';
-      factorItem.innerHTML = `
-        <div class="factor-label">${display.label}</div>
-        <div class="factor-value">${display.value}</div>
-        <div class="factor-impact ${display.impact >= 0 ? 'positive' : 'negative'}">+${display.impact}%</div>
-      `;
-      
-      factorsList.appendChild(factorItem);
-    });
-  
-  explainDiv.appendChild(factorsList);
+
+  if (!Array.isArray(breakdown) || breakdown.length === 0) {
+    return;
+  }
+
+  const list = document.createElement("div");
+  list.className = "risk-factors-list";
+
+  breakdown.forEach((item) => {
+    if (!item || typeof item !== "object") {
+      return;
+    }
+
+    const factor = String(item.factor ?? "");
+    const value = String(item.value ?? "");
+    const delta = Number(item.delta ?? 0);
+    const impact = Math.round(delta * 100);
+
+    const factorLabel = i18n[lang][`factor_${factor}`] || factor;
+    const signedImpact = impact >= 0 ? `+${impact}%` : `${impact}%`;
+
+    const factorItem = document.createElement("div");
+    factorItem.className = "risk-factor-item";
+    factorItem.innerHTML = `
+      <div class="factor-label">${factorLabel}</div>
+      <div class="factor-value">${value}</div>
+      <div class="factor-impact ${impact >= 0 ? "positive" : "negative"}">${signedImpact}</div>
+    `;
+
+    list.appendChild(factorItem);
+  });
+
+  explainDiv.appendChild(list);
 }
 
-// Global variable to store last breakdown data
-let lastBreakdownData = null;
+function applyRiskTheme(probability) {
+  const resultSection = document.querySelector(".result-section");
+  const explainDiv = document.getElementById("explain");
+  if (!resultSection || !explainDiv) {
+    return;
+  }
 
-// Function to update dynamic content when language changes
-function updateDynamicContent() {
-  const lang = document.documentElement.lang || 'en';
-  
-  // Update risk badge if it exists
-  const riskBadge = document.getElementById("riskBadge");
-  if (riskBadge && riskBadge.textContent && riskBadge.textContent !== "...") {
-    // Re-classify based on current language
-    const riskText = document.getElementById("riskText");
-    if (riskText && riskText.textContent) {
-      const percentMatch = riskText.textContent.match(/(\d+)%/);
-      if (percentMatch) {
-        const percent = parseInt(percentMatch[1]);
-        const p = percent / 100;
-        const cls = classifyRisk(p);
-        riskBadge.textContent = cls.badge;
-      }
-    }
+  resultSection.classList.remove("risk-theme-low", "risk-theme-medium", "risk-theme-high");
+  explainDiv.classList.remove("risk-factors--low", "risk-factors--medium", "risk-factors--high");
+
+  if (probability < 0.33) {
+    resultSection.classList.add("risk-theme-low");
+    explainDiv.classList.add("risk-factors--low");
+    return;
   }
-  
-  // Update advice if it exists
+
+  if (probability < 0.66) {
+    resultSection.classList.add("risk-theme-medium");
+    explainDiv.classList.add("risk-factors--medium");
+    return;
+  }
+
+  resultSection.classList.add("risk-theme-high");
+  explainDiv.classList.add("risk-factors--high");
+}
+
+function setLanguage(lang) {
+  if (!i18n[lang]) {
+    return;
+  }
+
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "he" ? "rtl" : "ltr";
+  applyI18nText(lang);
+  renderAllSelectOptions(lang);
+
+  document.querySelectorAll(".lang-btn").forEach((btn) => {
+    btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+  });
+
   const advice = document.getElementById("advice");
-  if (advice && advice.textContent && !advice.textContent.includes("Select") && !advice.textContent.includes("בחר")) {
-    const riskText = document.getElementById("riskText");
-    if (riskText && riskText.textContent) {
-      const percentMatch = riskText.textContent.match(/(\d+)%/);
-      if (percentMatch) {
-        const percent = parseInt(percentMatch[1]);
-        const p = percent / 100;
-        advice.textContent = setAdvice(p);
-      }
-    }
+  if (advice) {
+    advice.textContent = lastProbability === null ? i18n[lang].select_conditions_advice : setAdvice(lastProbability);
   }
-  
-  // Re-render risk factors if we have stored data
-  if (lastBreakdownData && lastBreakdownData.length > 0) {
+
+  if (lastBreakdownData.length > 0) {
     renderBreakdown(lastBreakdownData);
   }
+
+  if (lastProbability !== null) {
+    const cls = classifyRisk(lastProbability);
+    const percent = Math.round(lastProbability * 100);
+    const riskText = document.getElementById("riskText");
+    const riskBadge = document.getElementById("riskBadge");
+    if (riskText) {
+      riskText.textContent = `${percent}% (${cls.label})`;
+      riskText.style.color = cls.color;
+    }
+    if (riskBadge) {
+      riskBadge.textContent = cls.badge;
+      riskBadge.className = `risk-badge ${cls.cssClass}`;
+    }
+  }
+
+  localStorage.setItem("ui_language", lang);
 }
 
-// Initialize language on page load
 function initializeLanguage() {
-  const savedLang = localStorage.getItem('ui_language') || 'en';
-  setLanguage(savedLang);
+  const saved = localStorage.getItem("ui_language");
+  setLanguage(saved === "he" ? "he" : "en");
 }
 
-function initializeApp() {
-  // Get DOM elements
+function getNumericValue(id, fallback) {
+  const node = document.getElementById(id);
+  if (!node) {
+    return fallback;
+  }
+  const value = Number(node.value);
+  return Number.isFinite(value) ? value : fallback;
+}
+
+function getStringValue(id, fallback) {
+  const node = document.getElementById(id);
+  if (!node) {
+    return fallback;
+  }
+  const value = String(node.value || "").trim();
+  return value === "" ? fallback : value;
+}
+
+async function predict() {
+  const lang = getCurrentLanguage();
   const btn = document.getElementById("btn");
   const btnText = document.querySelector(".btn-text");
   const btnLoading = document.querySelector(".btn-loading");
   const riskText = document.getElementById("riskText");
-  const riskBar = document.getElementById("riskBar");
   const riskBadge = document.getElementById("riskBadge");
-  const errorText = document.getElementById("errorText");
   const advice = document.getElementById("advice");
   const explainDiv = document.getElementById("explain");
+  const errorText = document.getElementById("errorText");
+  const gaugeNeedle = document.getElementById("gaugeNeedle");
+  const lightProb = document.getElementById("lightProb");
+  const dangerousProb = document.getElementById("dangerousProb");
 
-  // Check if all required elements exist
-  console.log("DOM elements check:");
-  console.log("- btn:", !!btn);
-  console.log("- btnText:", !!btnText);
-  console.log("- btnLoading:", !!btnLoading);
-  console.log("- riskText:", !!riskText);
-  console.log("- riskBar:", !!riskBar);
-  console.log("- riskBadge:", !!riskBadge);
-  console.log("- errorText:", !!errorText);
-  console.log("- advice:", !!advice);
-  console.log("- explainDiv:", !!explainDiv);
+  if (!btn || !btnText || !btnLoading || !riskText || !riskBadge || !advice || !explainDiv || !errorText || !gaugeNeedle || !lightProb || !dangerousProb) {
+    return;
+  }
 
-  // API endpoint - dynamically set based on environment
-  function getApiEndpoint() {
-    const currentPort = window.location.port;
-    const currentHost = window.location.hostname;
+  errorText.style.display = "none";
+  btn.disabled = true;
+  btnText.style.display = "none";
+  btnLoading.style.display = "inline";
 
-    // If served from backend (port 8000), use relative URL
-    if (currentPort === '8000') {
-      return '/predict';
+  riskText.textContent = "...";
+  riskText.style.color = "";
+  riskBadge.textContent = i18n[lang].ready;
+  riskBadge.className = "risk-badge";
+  advice.textContent = i18n[lang].calculating;
+  explainDiv.textContent = "";
+
+  const payload = {
+    hour: getNumericValue("SHAA", 0),
+    month: getNumericValue("HODESH_TEUNA", 1),
+    accident_type: getStringValue("SUG_TEUNA", "0"),
+    speed_limit: getStringValue("MEHIRUT_MUTERET", "0")
+  };
+
+  try {
+    const response = await fetch(getApiEndpoint(), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
     }
 
-    // If served from Live Server or other (port 5500, etc.), use full backend URL
-    return `http://${currentHost}:8001/predict`;
-  }
-
-  const API_ENDPOINT = getApiEndpoint();
-
-  // Utility function to check if a value is a finite number in [0,1]
-  function isValidProbability(value) {
-    return typeof value === "number" && isFinite(value) && value >= 0 && value <= 1;
-  }
-
-  // Utility function to safely convert to number, defaulting to 0
-  function safeToNumber(value, defaultValue = 0) {
-    const num = Number(value);
-    return isFinite(num) ? num : defaultValue;
-  }
-
-  // Utility function to safely get string value
-  function safeToString(value, defaultValue = "") {
-    return typeof value === "string" ? value : String(value || defaultValue);
-  }
-
-  function classifyRisk(p) {
-    const currentLang = document.documentElement.lang || 'en';
-    if (p < 0.33) return { 
-      label: i18n[currentLang].low_risk_label, 
-      badge: i18n[currentLang].low, 
-      color: "#2e7d32", 
-      cssClass: "risk-low" 
-    };
-    if (p < 0.66) return { 
-      label: i18n[currentLang].medium_risk_label, 
-      badge: i18n[currentLang].medium, 
-      color: "#ed6c02", 
-      cssClass: "risk-medium" 
-    };
-    return { 
-      label: i18n[currentLang].high_risk_label, 
-      badge: i18n[currentLang].high, 
-      color: "#d32f2f", 
-      cssClass: "risk-high" 
-    };
-  }
-
-  function setAdvice(p) {
-    const currentLang = document.documentElement.lang || 'en';
-    if (p < 0.33) return i18n[currentLang].low_risk_advice;
-    if (p < 0.66) return i18n[currentLang].medium_risk_advice;
-    return i18n[currentLang].high_risk_advice;
-  }
-
-  async function predict() {
-    console.log("predict() function called"); // Debug log
-
-    // Check if all required elements exist
-    if (!btn || !btnText || !btnLoading || !riskText || !riskBar || !riskBadge || !errorText || !advice || !explainDiv) {
-      console.error("Missing DOM elements!");
-      return;
+    const data = await response.json();
+    const probability = Number(data.probability);
+    if (!Number.isFinite(probability) || probability < 0 || probability > 1) {
+      throw new Error("invalid_probability");
     }
 
-    errorText.style.display = "none";
-    btn.disabled = true;
-    btnText.style.display = "none";
-    btnLoading.style.display = "inline";
-    riskText.textContent = "…";
-    riskText.style.color = "";
-    riskBadge.textContent = i18n[document.documentElement.lang || 'en'].ready;
-    riskBadge.className = "risk-badge"; // Reset classes
-    riskBar.style.width = "0%";
-    riskBar.style.background = "#2f6fed";
-    advice.textContent = i18n[document.documentElement.lang || 'en'].calculating;
-    explainDiv.textContent = "";
+    const percent = Number.isFinite(Number(data.risk_percent)) ? Number(data.risk_percent) : Math.round(probability * 100);
+    const cls = classifyRisk(probability);
 
-    const payload = {
-      road_type: document.getElementById("road_type").value,
-      weather: document.getElementById("weather").value,
-      time_of_day: document.getElementById("time_of_day").value,
-      lighting: document.getElementById("lighting").value,
-      junction: document.getElementById("junction").value,
-      road_surface: document.getElementById("road_surface").value
-    };
+    lastProbability = probability;
+    lastBreakdownData = Array.isArray(data.breakdown) ? data.breakdown : [];
 
-    try {
-      console.log("About to fetch:", API_ENDPOINT, "with payload:", payload); // Debug log
-      const res = await fetch(API_ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
+    riskText.textContent = `${percent}% (${cls.label})`;
+    riskText.style.color = cls.color;
+    riskBadge.textContent = cls.badge;
+    riskBadge.className = `risk-badge ${cls.cssClass}`;
+    advice.textContent = setAdvice(probability);
 
-      if (!res.ok) {
-        let errorMessage = `HTTP ${res.status}`;
-        try {
-          const errorText = await res.text();
-          if (errorText) {
-            errorMessage += `: ${errorText}`;
-          }
-        } catch (textError) {
-          // Ignore text parsing errors
-        }
-        throw new Error(errorMessage);
-      }
+    gaugeNeedle.style.left = `${Math.max(0, Math.min(100, percent))}%`;
+    dangerousProb.textContent = `${Math.max(0, Math.min(100, percent))}%`;
+    lightProb.textContent = `${Math.max(0, 100 - Math.max(0, Math.min(100, percent)))}%`;
 
-      let data;
-      try {
-        data = await res.json();
-      } catch (jsonError) {
-        throw new Error("Server returned invalid JSON response");
-      }
-
-      // Validate response structure
-      if (!data || typeof data !== "object") {
-        throw new Error("Server returned invalid response format");
-      }
-
-      // Validate and extract probability
-      const rawProbability = data.probability;
-      if (!isValidProbability(rawProbability)) {
-        throw new Error(`Server returned invalid probability: ${rawProbability}`);
-      }
-
-      const p = rawProbability;
-      const percent = Math.round(p * 100);
-
-      const cls = classifyRisk(p);
-
-      riskText.textContent = `${percent}% (${cls.label})`;
-      riskText.style.color = cls.color;
-
-      riskBadge.textContent = cls.badge;
-      riskBadge.className = `risk-badge ${cls.cssClass}`;
-
-      riskBar.style.width = `${percent}%`;
-      riskBar.style.background = cls.color;
-
-      advice.textContent = setAdvice(p);
-
-      // Defensive breakdown rendering
-      const breakdown = Array.isArray(data.breakdown) ? data.breakdown : [];
-      if (breakdown.length > 0) {
-        lastBreakdownData = breakdown; // Store for language switching
-        renderBreakdown(breakdown);
-      }
-    } catch (e) {
-      console.error("Prediction error:", e);
-
-      // Determine error type and show appropriate message
-      let userMessage = i18n[document.documentElement.lang || 'en'].error_prediction;
-      let errorType = 'unknown';
-
-      if (e.name === 'TypeError' && e.message.includes('fetch')) {
-        // Network/connection error
-        userMessage = i18n[document.documentElement.lang || 'en'].network_error;
-        errorType = 'network';
-        console.error("Network error - likely backend server not running or CORS issue");
-      } else if (e.message.includes('HTTP')) {
-        // Server returned error status
-        userMessage = i18n[document.documentElement.lang || 'en'].server_error;
-        errorType = 'server';
-        console.error("Server error - check backend logs");
-      } else if (e.message.includes('JSON') || e.message.includes('invalid')) {
-        // Invalid response format
-        userMessage = i18n[document.documentElement.lang || 'en'].invalid_response;
-        errorType = 'response';
-        console.error("Invalid response format from server");
-      }
-
-      console.error(`Error type: ${errorType}, User message: ${userMessage}`);
-
-      errorText.style.display = "block";
-      advice.textContent = userMessage;
-      riskBadge.textContent = i18n[document.documentElement.lang || 'en'].error;
-      riskBadge.className = "risk-badge risk-error";
-    } finally {
-      btn.disabled = false;
-      btnText.style.display = "inline";
-      btnLoading.style.display = "none";
+    renderBreakdown(lastBreakdownData);
+    applyRiskTheme(probability);
+  } catch (error) {
+    let userMessage = i18n[lang].server_error;
+    if (error instanceof TypeError) {
+      userMessage = i18n[lang].network_error;
+    } else if (String(error.message).includes("invalid_probability")) {
+      userMessage = i18n[lang].invalid_response;
     }
+
+    errorText.style.display = "block";
+    advice.textContent = userMessage;
+    riskBadge.textContent = i18n[lang].error;
+    riskBadge.className = "risk-badge risk-error";
+  } finally {
+    btn.disabled = false;
+    btnText.style.display = "inline";
+    btnLoading.style.display = "none";
   }
+}
 
-  // Initialize language
-  initializeLanguage();
-
-  // Add language toggle event listeners
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      const lang = this.getAttribute('data-lang');
+function bindEvents() {
+  document.querySelectorAll(".lang-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const lang = btn.getAttribute("data-lang") === "he" ? "he" : "en";
       setLanguage(lang);
     });
   });
 
-  // Attach event listener only if button exists
-  if (btn) {
-    btn.addEventListener("click", function(event) {
-      event.preventDefault(); // Prevent any default form submission
-      console.log("Predict button clicked!"); // Debug log
+  const predictButton = document.getElementById("btn");
+  if (predictButton) {
+    predictButton.addEventListener("click", (event) => {
+      event.preventDefault();
       predict();
     });
-  } else {
-    console.error("Button with id 'btn' not found!");
   }
 
-  console.log("script.js loaded and initialized");
+  document.querySelectorAll(".input-group select").forEach((select) => {
+    select.addEventListener("change", updateSelectVisualState);
+  });
 }
 
-// Check if DOM is already loaded (since script is loaded at end of body)
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initializeApp);
+function initializeApp() {
+  initializeLanguage();
+  renderAllSelectOptions(getCurrentLanguage());
+  bindEvents();
+
+  const advice = document.getElementById("advice");
+  if (advice) {
+    advice.textContent = i18n[getCurrentLanguage()].select_conditions_advice;
+  }
+
+  const gaugeNeedle = document.getElementById("gaugeNeedle");
+  if (gaugeNeedle) {
+    gaugeNeedle.style.left = "0%";
+  }
+
+  const lightProb = document.getElementById("lightProb");
+  const dangerousProb = document.getElementById("dangerousProb");
+  if (lightProb) {
+    lightProb.textContent = "--%";
+  }
+  if (dangerousProb) {
+    dangerousProb.textContent = "--%";
+  }
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initializeApp);
 } else {
-  // DOM is already loaded
   initializeApp();
 }
