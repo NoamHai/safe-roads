@@ -4,7 +4,21 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Safe Roads - Accident Risk Predictor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .advice-text .lang-en,
+    .advice-text .lang-he {
+      display: none;
+    }
+
+    html[lang="en"] .advice-text .lang-en,
+    html[lang="he"] .advice-text .lang-he {
+      display: inline;
+    }
+  </style>
 </head>
 <body>
   <header class="header">
@@ -29,56 +43,185 @@
         <p class="section-desc" data-i18n="select_conditions">Select your current driving conditions to get an instant risk assessment.</p>
 
         <form class="input-form">
-          <div class="input-grid">
-            <div class="input-group">
-              <label for="road_type" data-i18n="road_type">Road Type</label>
-              <select id="road_type">
-                <option value="urban" data-i18n="urban">Urban</option>
-                <option value="highway" data-i18n="highway">Highway</option>
-              </select>
-            </div>
+          <div class="form-section">
+            <h3 class="form-section-title" data-i18n="section_time_location">Time & Location</h3>
+            <div class="section-grid">
+              <div class="input-group">
+                <label for="SHAA" data-i18n="label_SHAA">Hour</label>
+                <select id="SHAA"></select>
+              </div>
 
-            <div class="input-group">
-              <label for="weather" data-i18n="weather">Weather</label>
-              <select id="weather">
-                <option value="clear" data-i18n="clear">Clear</option>
-                <option value="rain" data-i18n="rain">Rain</option>
-                <option value="fog" data-i18n="fog">Fog</option>
-              </select>
-            </div>
+              <div class="input-group">
+                <label for="HODESH_TEUNA" data-i18n="label_HODESH_TEUNA">Month</label>
+                <select id="HODESH_TEUNA"></select>
+              </div>
 
-            <div class="input-group">
-              <label for="time_of_day" data-i18n="time_of_day">Time of Day</label>
-              <select id="time_of_day">
-                <option value="day" data-i18n="day">Day</option>
-                <option value="night" data-i18n="night">Night</option>
-              </select>
-            </div>
+              <div class="input-group">
+                <label for="YOM_BASHAVUA" data-i18n="label_YOM_BASHAVUA">Day of Week</label>
+                <select id="YOM_BASHAVUA">
+                  <option value="0">Unknown / לא ידוע</option>
+                  <option value="1">Sunday / ראשון</option>
+                  <option value="2">Monday / שני</option>
+                  <option value="3">Tuesday / שלישי</option>
+                  <option value="4">Wednesday / רביעי</option>
+                  <option value="5">Thursday / חמישי</option>
+                  <option value="6">Friday / שישי</option>
+                  <option value="7">Saturday / שבת</option>
+                </select>
+              </div>
 
-            <div class="input-group">
-              <label for="lighting" data-i18n="lighting">Lighting</label>
-              <select id="lighting">
-                <option value="daylight" data-i18n="daylight">Daylight</option>
-                <option value="dark_with_streetlights" data-i18n="dark_streetlights">Dark (streetlights)</option>
-                <option value="dark_no_streetlights" data-i18n="dark_no_streetlights">Dark (no streetlights)</option>
-              </select>
-            </div>
+              <div class="input-group">
+                <label for="ZURAT_ISHUV" data-i18n="label_ZURAT_ISHUV">Settlement Type</label>
+                <select id="ZURAT_ISHUV">
+                  <option value="0">Unknown / לא ידוע</option>
+                  <option value="1">Urban / עירוני</option>
+                  <option value="2">Rural / כפרי</option>
+                  <option value="3">Main Road / כביש ראשי</option>
+                </select>
+              </div>
 
-            <div class="input-group">
-              <label for="junction" data-i18n="junction">Junction</label>
-              <select id="junction">
-                <option value="no_junction" data-i18n="no_junction">No junction</option>
-                <option value="junction" data-i18n="junction_area">Junction area</option>
-              </select>
+              <div class="input-group">
+                <label for="NAFA" data-i18n="label_NAFA">Traffic Density</label>
+                <select id="NAFA">
+                  <option value="0">Unknown / לא ידוע</option>
+                  <option value="1">Light / קל</option>
+                  <option value="2">Medium / בינוני</option>
+                  <option value="3">Heavy / כבד</option>
+                </select>
+              </div>
             </div>
+          </div>
 
-            <div class="input-group">
-              <label for="road_surface" data-i18n="road_surface">Road Surface</label>
-              <select id="road_surface">
-                <option value="dry" data-i18n="dry">Dry</option>
-                <option value="wet" data-i18n="wet">Wet</option>
-                <option value="unknown" data-i18n="unknown">Unknown</option>
-              </select>
+          <div class="form-section">
+            <h3 class="form-section-title" data-i18n="section_road_conditions">Road Conditions</h3>
+            <div class="section-grid">
+              <div class="input-group">
+                <label for="ROAD_STRUCTURE" data-i18n="label_ROAD_STRUCTURE">Road Structure</label>
+                <select id="ROAD_STRUCTURE">
+                  <option value="0">Unknown / לא ידוע</option>
+                  <option value="1">One-way / חד-כיווני</option>
+                  <option value="2">Two-way / דו-כיווני</option>
+                  <option value="3">Multi-lane Two-way / רב-נתיבים דו-כיווני</option>
+                  <option value="4">Multi-lane One-way / רב-נתיבים חד-כיווני</option>
+                </select>
+              </div>
+
+              <div class="input-group">
+                <label for="ROHAV" data-i18n="label_ROHAV">Road Width</label>
+                <select id="ROHAV">
+                  <option value="0">Unknown / לא ידוע</option>
+                  <option value="1">Narrow (≤6.5m) / צר</option>
+                  <option value="2">Medium (6.5-8m) / בינוני</option>
+                  <option value="3">Wide (>8m) / רחב</option>
+                </select>
+              </div>
+
+              <div class="input-group">
+                <label for="MEHIRUT_MUTERET" data-i18n="label_MEHIRUT_MUTERET">Speed Limit</label>
+                <select id="MEHIRUT_MUTERET">
+                  <option value="0">Unknown / לא ידוע</option>
+                  <option value="1">Up to 50 km/h / עד 50 קמ״ש</option>
+                  <option value="2">Up to 60 km/h / עד 60 קמ״ש</option>
+                  <option value="3">Up to 70 km/h / עד 70 קמ״ש</option>
+                  <option value="4">Up to 80 km/h / עד 80 קמ״ש</option>
+                  <option value="5">Up to 90 km/h / עד 90 קמ״ש</option>
+                  <option value="6">Up to 100 km/h / עד 100 קמ״ש</option>
+                  <option value="7">Up to 110 km/h / עד 110 קמ״ש</option>
+                  <option value="8">Up to 120 km/h / עד 120 קמ״ש</option>
+                </select>
+              </div>
+
+              <div class="input-group">
+                <label for="TEURA" data-i18n="label_TEURA">Driving Manner</label>
+                <select id="TEURA">
+                  <option value="0">Unknown / לא ידוע</option>
+                  <option value="1">Careful / זהיר</option>
+                  <option value="2">Normal / נורמלי</option>
+                  <option value="3">Rushed / חפוז</option>
+                  <option value="4">Dangerous / מסוכן</option>
+                </select>
+              </div>
+
+              <div class="input-group">
+                <label for="SUG_DEREH" data-i18n="label_SUG_DEREH">Road Type</label>
+                <select id="SUG_DEREH">
+                  <option value="0">Unknown / לא ידוע</option>
+                  <option value="1">Urban at Junction / עירוני בצומת</option>
+                  <option value="2">Urban not at Junction / עירוני לא בצומת</option>
+                  <option value="3">Non-urban at Junction / לא עירוני בצומת</option>
+                  <option value="4">Non-urban not at Junction / לא עירוני לא בצומת</option>
+                </select>
+              </div>
+
+              <div class="input-group">
+                <label for="PNE_KVISH" data-i18n="label_PNE_KVISH">Road Surface</label>
+                <select id="PNE_KVISH">
+                  <option value="0">Unknown / לא ידוע</option>
+                  <option value="1">Dry / יבש</option>
+                  <option value="2">Wet / רטוב ממים</option>
+                  <option value="3">Fuel on Surface / מרוח בחומר דלק</option>
+                  <option value="4">Mud / מכוסה בבוץ</option>
+                </select>
+              </div>
+
+              <div class="input-group">
+                <label for="TKINUT" data-i18n="label_TKINUT">Weather</label>
+                <select id="TKINUT">
+                  <option value="0">Unknown / לא ידוע</option>
+                  <option value="1">Clear / בהיר</option>
+                  <option value="2">Cloudy / מעונן</option>
+                  <option value="3">Rainy / גשום</option>
+                  <option value="4">Foggy / ערפילי</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3 class="form-section-title" data-i18n="section_accident_details">Accident Details</h3>
+            <div class="section-grid">
+              <div class="input-group">
+                <label for="SUG_TEUNA" data-i18n="label_SUG_TEUNA">Accident Type</label>
+                <select id="SUG_TEUNA">
+                  <option value="0">Unknown / לא ידוע</option>
+                  <option value="1">Frontal / חזיתי</option>
+                  <option value="2">Rear-end / אחורי</option>
+                  <option value="3">Side / צדדי</option>
+                  <option value="4">Pedestrian / הולך רגל</option>
+                </select>
+              </div>
+
+              <div class="input-group">
+                <label for="SIMUN_TIMRUR" data-i18n="label_SIMUN_TIMRUR">Traffic Marking</label>
+                <select id="SIMUN_TIMRUR">
+                  <option value="0">Unknown / לא ידוע</option>
+                  <option value="1">Traffic Light / בעל רמזור</option>
+                  <option value="2">Traffic Sign / בעל תמרור</option>
+                  <option value="3">No Marking / ללא סימונים</option>
+                </select>
+              </div>
+
+              <div class="input-group">
+                <label for="MEKOM_HAZIYA" data-i18n="label_MEKOM_HAZIYA">Crossing Location</label>
+                <select id="MEKOM_HAZIYA">
+                  <option value="0">Unknown / לא ידוע</option>
+                  <option value="1">Road Center / מרכז כביש</option>
+                  <option value="2">Road Side / שיץ כביש</option>
+                  <option value="3">Parking / חניה</option>
+                  <option value="4">Sidewalk / מדרכה</option>
+                </select>
+              </div>
+
+              <div class="input-group">
+                <label for="OFEN_HAZIYA" data-i18n="label_OFEN_HAZIYA">Crossing Method</label>
+                <select id="OFEN_HAZIYA">
+                  <option value="0">Unknown / לא ידוע</option>
+                  <option value="1">Collision / תאונה</option>
+                  <option value="2">Rollover / התהפכות</option>
+                  <option value="3">Leaving Road / יציאה מכביש</option>
+                  <option value="4">Other / התחזקות</option>
+                </select>
+              </div>
             </div>
           </div>
 
@@ -104,19 +247,33 @@
             </div>
 
             <div class="risk-meter">
-              <div class="meter-label">
-                <span data-i18n="low_risk">Low Risk</span>
-                <span data-i18n="high_risk">High Risk</span>
+              <div class="gauge-wrap">
+                <div class="linear-gauge" aria-hidden="true">
+                  <div class="gauge-indicator" id="gaugeNeedle"></div>
+                </div>
+                <div class="gauge-scale">
+                  <span data-i18n="low_risk">Low Risk</span>
+                  <span data-i18n="medium_risk_label">Medium Risk</span>
+                  <span data-i18n="high_risk">High Risk</span>
+                </div>
               </div>
-              <div class="meter-bar">
-                <div class="meter-fill" id="riskBar"></div>
+
+              <div class="two-probabilities">
+                <div class="probability-item">
+                  <div class="probability-title" data-i18n="light_accident">Light Accident</div>
+                  <div class="probability-value" id="lightProb">—%</div>
+                </div>
+                <div class="probability-item">
+                  <div class="probability-title" data-i18n="dangerous_accident">Dangerous Accident</div>
+                  <div class="probability-value" id="dangerousProb">—%</div>
+                </div>
               </div>
             </div>
 
             <div class="result-content">
               <div class="advice-section">
                 <h3 data-i18n="recommendation">Recommendation</h3>
-                <p id="advice" class="advice-text" data-i18n="select_conditions_advice">Select your driving conditions and click "Predict Risk" to get personalized safety recommendations.</p>
+                <p id="advice" class="advice-text"><span class="lang-en">Select your driving conditions and click "Predict Risk" to get personalized safety recommendations.</span><span class="lang-he">בחר את תנאי הנהיגה ולחץ על "חשב סיכון" כדי לקבל המלצות בטיחות מותאמות אישית.</span></p>
               </div>
 
               <div class="breakdown-section">

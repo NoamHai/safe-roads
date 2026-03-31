@@ -1,5 +1,5 @@
 // Internationalization dictionary
-const translations = {
+const i18n = {
   en: {
     // Header
     choose_language: "Choose a language",
@@ -92,18 +92,7 @@ const translations = {
     value_junction_area: "Junction area",
     value_dry: "Dry",
     value_wet: "Wet",
-    value_unknown: "Unknown",
-
-    // Additional keys
-    lowRiskLabel: "Low Risk",
-    highRiskLabel: "High Risk",
-    errorNetworkTitle: "Unable to Calculate Risk",
-    errorNetworkText: "Please check your connection and try again.",
-    riskFactorsTitle: "Risk Factors",
-    riskFactorsEmpty: "No significant risk factors detected",
-    riskLevelLow: "Low risk",
-    riskLevelMedium: "Medium risk",
-    riskLevelHigh: "High risk"
+    value_unknown: "Unknown"
   },
   he: {
     // Header
@@ -197,55 +186,26 @@ const translations = {
     value_junction_area: "אזור צומת",
     value_dry: "יבש",
     value_wet: "רטוב",
-    value_unknown: "לא ידוע",
-
-    // Additional keys
-    lowRiskLabel: "סיכון נמוך",
-    highRiskLabel: "סיכון גבוה",
-    errorNetworkTitle: "לא ניתן לחשב סיכון",
-    errorNetworkText: "אנא בדוק את החיבור שלך ונסה שוב.",
-    riskFactorsTitle: "גורמי סיכון",
-    riskFactorsEmpty: "לא זוהו גורמי סיכון משמעותיים",
-    riskLevelLow: "סיכון נמוך",
-    riskLevelMedium: "סיכון בינוני",
-    riskLevelHigh: "סיכון גבוה"
+    value_unknown: "לא ידוע"
   }
 };
 
-// ========== SINGLE SOURCE OF TRUTH ==========
-// These two variables control ALL UI rendering. No other flags are allowed.
-let lastPredictionData = null;      // stores last successful API response
-let hasPredictionError = false;     // true ONLY if last prediction failed
-
 // Language management functions
 function setLanguage(lang) {
-  if (!translations[lang]) {
+  if (!i18n[lang]) {
     console.error(`Language '${lang}' not found`);
     return;
   }
-  
-  console.log(`=== setLanguage(${lang}) called ===`);
-  console.log('State:', { hasData: !!lastPredictionData, hasError: hasPredictionError });
   
   // Update HTML attributes
   document.documentElement.lang = lang;
   document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
   
-  // Update ONLY static translations (elements with data-i18n that are NOT dynamic prediction data)
-  // Dynamic elements (advice, riskBadge) will be updated by renderPrediction if we have data
-  const dynamicElementIds = ['advice', 'riskBadge'];
-  
+  // Update all elements with data-i18n
   document.querySelectorAll('[data-i18n]').forEach(element => {
     const key = element.getAttribute('data-i18n');
-    
-    // Skip dynamic elements - they'll be handled by state rendering
-    if (dynamicElementIds.includes(element.id)) {
-      return;
-    }
-    
-    // Update static UI translations
-    if (translations[lang][key]) {
-      element.textContent = translations[lang][key];
+    if (i18n[lang][key]) {
+      element.textContent = i18n[lang][key];
     }
   });
   
@@ -254,23 +214,8 @@ function setLanguage(lang) {
     btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
   });
   
-  // Handle prediction state based on single source of truth
-  if (lastPredictionData !== null) {
-    // We have prediction data - re-render with new language
-    console.log('Re-rendering prediction with new language');
-    renderPrediction(lastPredictionData);
-  }
-  
-  // STRICT RULE: Error UI may ONLY be shown if hasPredictionError === true
-  if (DOM.errorText) {
-    if (hasPredictionError === true) {
-      DOM.errorText.style.display = "block";
-      console.log('Showing error state (hasPredictionError === true)');
-    } else {
-      DOM.errorText.style.display = "none";
-      console.log('Hiding error state (hasPredictionError === false)');
-    }
-  }
+  // Update dynamic content if it exists
+  updateDynamicContent();
   
   // Save to localStorage
   localStorage.setItem('ui_language', lang);
@@ -283,8 +228,8 @@ function getFactorDisplay(factor, value, delta, lang) {
   const factorLabelKey = `factor_${factor}`;
   const valueKey = `value_${value}`;
   
-  const label = translations[lang][factorLabelKey] || factor;
-  const displayValue = translations[lang][valueKey] || value;
+  const label = i18n[lang][factorLabelKey] || factor;
+  const displayValue = i18n[lang][valueKey] || value;
   const deltaPercent = Math.round(delta * 100);
   
   return {
@@ -299,16 +244,10 @@ function renderBreakdown(breakdown) {
   const explainDiv = document.getElementById("explain");
   const lang = document.documentElement.lang || 'en';
   
-  // Clear previous content
-  explainDiv.innerHTML = '';
+  explainDiv.innerHTML = `<div class="risk-factors-title">${i18n[lang].why_this_risk}</div>`;
   
-  if (!breakdown || breakdown.length === 0) {
-    explainDiv.innerHTML = `<p>${translations[lang].riskFactorsEmpty}</p>`;
-    return;
-  }
-  
-  const ul = document.createElement('ul');
-  ul.className = 'risk-factors-list';
+  const factorsList = document.createElement('div');
+  factorsList.className = 'risk-factors-list';
   
   breakdown
     .filter(item => item && typeof item === "object")
@@ -317,152 +256,63 @@ function renderBreakdown(breakdown) {
       const value = safeToString(item.value, "unknown");
       const delta = safeToNumber(item.delta, 0);
       
-      const factorLabel = translations[lang][`factor_${factor}`] || factor;
-      const valueLabel = translations[lang][`value_${value}`] || value;
-      const deltaPercent = Math.round(delta * 100);
+      const display = getFactorDisplay(factor, value, delta, lang);
       
-      const li = document.createElement('li');
-      li.textContent = `${factorLabel}: ${valueLabel} (${deltaPercent >= 0 ? '+' : ''}${deltaPercent}%)`;
+      const factorItem = document.createElement('div');
+      factorItem.className = 'risk-factor-item';
+      factorItem.innerHTML = `
+        <div class="factor-label">${display.label}</div>
+        <div class="factor-value">${display.value}</div>
+        <div class="factor-impact ${display.impact >= 0 ? 'positive' : 'negative'}">+${display.impact}%</div>
+      `;
       
-      ul.appendChild(li);
+      factorsList.appendChild(factorItem);
     });
   
-  explainDiv.appendChild(ul);
+  explainDiv.appendChild(factorsList);
 }
 
-// ========== STATE MANAGEMENT ARCHITECTURE ==========
-// Global DOM references (initialized on app load)
-let DOM = {
-  btn: null,
-  btnText: null,
-  btnLoading: null,
-  riskText: null,
-  riskBar: null,
-  riskBadge: null,
-  advice: null,
-  errorText: null,
-  explainDiv: null
-};
+// Global variable to store last breakdown data
+let lastBreakdownData = null;
 
-// Initialize DOM references
-function initializeDOMReferences() {
-  DOM.btn = document.getElementById("btn");
-  DOM.btnText = document.querySelector(".btn-text");
-  DOM.btnLoading = document.querySelector(".btn-loading");
-  DOM.riskText = document.getElementById("riskText");
-  DOM.riskBar = document.getElementById("riskBar");
-  DOM.riskBadge = document.getElementById("riskBadge");
-  DOM.advice = document.getElementById("advice");
-  DOM.errorText = document.getElementById("errorText");
-  DOM.explainDiv = document.getElementById("explain");
+// Function to update dynamic content when language changes
+function updateDynamicContent() {
+  const lang = document.documentElement.lang || 'en';
   
-  console.log("DOM references initialized:", {
-    btn: !!DOM.btn,
-    btnText: !!DOM.btnText,
-    btnLoading: !!DOM.btnLoading,
-    riskText: !!DOM.riskText,
-    riskBar: !!DOM.riskBar,
-    riskBadge: !!DOM.riskBadge,
-    advice: !!DOM.advice,
-    errorText: !!DOM.errorText,
-    explainDiv: !!DOM.explainDiv
-  });
-}
-
-// Utility function to check if a value is a finite number in [0,1]
-function isValidProbability(value) {
-  return typeof value === "number" && isFinite(value) && value >= 0 && value <= 1;
-}
-
-// Utility function to safely convert to number, defaulting to 0
-function safeToNumber(value, defaultValue = 0) {
-  const num = Number(value);
-  return isFinite(num) ? num : defaultValue;
-}
-
-// Utility function to safely get string value
-function safeToString(value, defaultValue = "") {
-  return typeof value === "string" ? value : String(value || defaultValue);
-}
-
-function classifyRisk(p) {
-  const currentLang = document.documentElement.lang || 'en';
-  if (p < 0.33) return { 
-    label: translations[currentLang].low_risk_label, 
-    badge: translations[currentLang].low, 
-    color: "#2e7d32", 
-    cssClass: "risk-low" 
-  };
-  if (p < 0.66) return { 
-    label: translations[currentLang].medium_risk_label, 
-    badge: translations[currentLang].medium, 
-    color: "#ed6c02", 
-    cssClass: "risk-medium" 
-  };
-  return { 
-    label: translations[currentLang].high_risk_label, 
-    badge: translations[currentLang].high, 
-    color: "#d32f2f", 
-    cssClass: "risk-high" 
-  };
-}
-
-function setAdvice(p) {
-  const currentLang = document.documentElement.lang || 'en';
-  if (p < 0.33) return translations[currentLang].low_risk_advice;
-  if (p < 0.66) return translations[currentLang].medium_risk_advice;
-  return translations[currentLang].high_risk_advice;
-}
-
-// ========== RENDERING PIPELINE ==========
-// ONE rendering function - all prediction UI updates go through here
-function renderPrediction(data) {
-  if (!data || !data.probability) return;
-  
-  const currentLang = document.documentElement.lang || 'en';
-  const { riskText, riskBar, riskBadge, advice, explainDiv } = DOM;
-  
-  const p = data.probability;
-  const percent = Math.round(p * 100);
-  const cls = classifyRisk(p);
-  
-  // Update percentage text
-  if (riskText) {
-    riskText.textContent = `${percent}% (${cls.label})`;
-    riskText.style.color = cls.color;
+  // Update risk badge if it exists
+  const riskBadge = document.getElementById("riskBadge");
+  if (riskBadge && riskBadge.textContent && riskBadge.textContent !== "...") {
+    // Re-classify based on current language
+    const riskText = document.getElementById("riskText");
+    if (riskText && riskText.textContent) {
+      const percentMatch = riskText.textContent.match(/(\d+)%/);
+      if (percentMatch) {
+        const percent = parseInt(percentMatch[1]);
+        const p = percent / 100;
+        const cls = classifyRisk(p);
+        riskBadge.textContent = cls.badge;
+      }
+    }
   }
   
-  // Update risk level text using translations[currentLang]
-  if (riskBadge) {
-    riskBadge.textContent = cls.badge;
-    riskBadge.className = `risk-badge ${cls.cssClass}`;
+  // Update advice if it exists
+  const advice = document.getElementById("advice");
+  if (advice && advice.textContent && !advice.textContent.includes("Select") && !advice.textContent.includes("בחר")) {
+    const riskText = document.getElementById("riskText");
+    if (riskText && riskText.textContent) {
+      const percentMatch = riskText.textContent.match(/(\d+)%/);
+      if (percentMatch) {
+        const percent = parseInt(percentMatch[1]);
+        const p = percent / 100;
+        advice.textContent = setAdvice(p);
+      }
+    }
   }
   
-  // Update progress bar
-  if (riskBar) {
-    riskBar.style.width = `${percent}%`;
-    riskBar.style.background = cls.color;
+  // Re-render risk factors if we have stored data
+  if (lastBreakdownData && lastBreakdownData.length > 0) {
+    renderBreakdown(lastBreakdownData);
   }
-  
-  // Update advice
-  if (advice) {
-    advice.textContent = setAdvice(p);
-  }
-  
-  // Render risk factors
-  if (data.breakdown) {
-    renderBreakdown(data.breakdown);
-  }
-  
-  // Update risk factors accent color to match current risk level
-  if (explainDiv) {
-    // Remove all risk level classes
-    explainDiv.classList.remove('risk-factors--low', 'risk-factors--medium', 'risk-factors--high');
-    // Add the current risk level class
-    explainDiv.classList.add(`risk-factors--${cls.cssClass.replace('risk-', '')}`);
-  }
-  
-  console.log("Rendered prediction:", { probability: data.probability, percent, lang: currentLang, riskClass: cls.cssClass });
 }
 
 // Initialize language on page load
@@ -471,209 +321,219 @@ function initializeLanguage() {
   setLanguage(savedLang);
 }
 
-// ========== API CONFIGURATION ==========
-function getApiEndpoint() {
-  const currentPort = window.location.port;
-  const currentHost = window.location.hostname;
-
-  console.log("=== API Endpoint Detection ===");
-  console.log("Current URL:", window.location.href);
-  console.log("Current Host:", currentHost);
-  console.log("Current Port:", currentPort);
-
-  // If served from backend (port 8000), use relative URL
-  if (currentPort === '8000') {
-    console.log("Using relative URL (same origin)");
-    return '/predict';
-  }
-
-  // If served from Live Server or other (port 5500, etc.), use full backend URL
-  const endpoint = `http://${currentHost}:8000/predict`;
-  console.log("Using full backend URL:", endpoint);
-  return endpoint;
-}
-
-const API_ENDPOINT = getApiEndpoint();
-console.log("Final API_ENDPOINT:", API_ENDPOINT);
-
-// ========== PREDICTION LOGIC ==========
-async function predict() {
-  console.log("=== PREDICT FUNCTION CALLED ===");
-
-  // Check if DOM references are initialized
-  if (!DOM.btn || !DOM.riskText || !DOM.errorText) {
-    console.error("DOM references not initialized!");
-    return;
-  }
-
-  const currentLang = document.documentElement.lang || 'en';
-  
-  // STRICT RULE: Clear previous state
-  hasPredictionError = false;
-  lastPredictionData = null;
-  
-  // Hide error (hasPredictionError is now false)
-  if (DOM.errorText) {
-    DOM.errorText.style.display = "none";
-    console.log('Error hidden at start of new prediction');
-  }
-  
-  // Show loading state
-  DOM.btn.disabled = true;
-  DOM.btnText.style.display = "none";
-  DOM.btnLoading.style.display = "inline";
-  
-  // Reset UI to loading
-  if (DOM.riskText) {
-    DOM.riskText.textContent = "…";
-    DOM.riskText.style.color = "";
-  }
-  if (DOM.riskBadge) {
-    DOM.riskBadge.textContent = translations[currentLang].ready;
-    DOM.riskBadge.className = "risk-badge";
-  }
-  if (DOM.riskBar) {
-    DOM.riskBar.style.width = "0%";
-    DOM.riskBar.style.background = "#2f6fed";
-  }
-  if (DOM.advice) {
-    DOM.advice.textContent = translations[currentLang].calculating;
-  }
-  if (DOM.explainDiv) {
-    DOM.explainDiv.textContent = "";
-  }
-
-  const payload = {
-    road_type: document.getElementById("road_type").value,
-    weather: document.getElementById("weather").value,
-    time_of_day: document.getElementById("time_of_day").value,
-    lighting: document.getElementById("lighting").value,
-    junction: document.getElementById("junction").value,
-    road_surface: document.getElementById("road_surface").value
-  };
-
-  try {
-    console.log("=== PREDICTION REQUEST ===");
-    console.log("Endpoint:", API_ENDPOINT);
-    console.log("Payload:", JSON.stringify(payload, null, 2));
-    
-    const res = await fetch(API_ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-
-    console.log("=== RESPONSE RECEIVED ===");
-    console.log("Status:", res.status, res.statusText);
-    console.log("Headers:", Object.fromEntries(res.headers.entries()));
-
-    if (!res.ok) {
-      let errorMessage = `HTTP ${res.status}`;
-      try {
-        const errorText = await res.text();
-        console.log("Error response body:", errorText);
-        if (errorText) {
-          errorMessage += `: ${errorText}`;
-        }
-      } catch (textError) {
-        // Ignore text parsing errors
-      }
-      throw new Error(errorMessage);
-    }
-
-    let data;
-    try {
-      data = await res.json();
-      console.log("=== RESPONSE DATA ===");
-      console.log(JSON.stringify(data, null, 2));
-    } catch (jsonError) {
-      console.error("JSON parse error:", jsonError);
-      throw new Error("Server returned invalid JSON response");
-    }
-
-    // Validate response structure
-    if (!data || typeof data !== "object") {
-      throw new Error("Server returned invalid response format");
-    }
-
-    // Validate and extract probability
-    const rawProbability = data.probability;
-    if (!isValidProbability(rawProbability)) {
-      throw new Error(`Server returned invalid probability: ${rawProbability}`);
-    }
-
-    const p = rawProbability;
-    const breakdown = Array.isArray(data.breakdown) ? data.breakdown : [];
-    
-    // STRICT RULE: Update state first
-    lastPredictionData = {
-      probability: p,
-      breakdown: breakdown
-    };
-    hasPredictionError = false;
-    
-    // STRICT RULE: Hide error after ANY successful prediction
-    if (DOM.errorText) {
-      DOM.errorText.style.display = "none";
-      console.log('Error hidden after successful prediction');
-    }
-    
-    // Render success state
-    renderPrediction(lastPredictionData);
-    
-    console.log("=== PREDICTION SUCCESS ===");
-  } catch (e) {
-    console.error("=== PREDICTION ERROR ===", e);
-
-    // Determine error type and message
-    let userMessage = translations[currentLang].error_prediction;
-    let errorType = 'unknown';
-
-    if (e.name === 'TypeError' && e.message.includes('fetch')) {
-      userMessage = translations[currentLang].network_error;
-      errorType = 'network';
-      console.error("Network error - likely backend server not running or CORS issue");
-    } else if (e.message.includes('HTTP')) {
-      userMessage = translations[currentLang].server_error;
-      errorType = 'server';
-      console.error("Server error - check backend logs");
-    } else if (e.message.includes('JSON') || e.message.includes('invalid')) {
-      userMessage = translations[currentLang].invalid_response;
-      errorType = 'response';
-      console.error("Invalid response format from server");
-    }
-
-    console.error(`Error type: ${errorType}, User message: ${userMessage}`);
-
-    // STRICT RULE: Update state first, then show error ONLY if hasPredictionError === true
-    hasPredictionError = true;
-    lastPredictionData = null;
-    
-    // Show error state (ONLY because hasPredictionError === true)
-    if (DOM.errorText && hasPredictionError === true) {
-      DOM.errorText.style.display = "block";
-    }
-    if (DOM.advice) DOM.advice.textContent = userMessage;
-    if (DOM.riskBadge) {
-      DOM.riskBadge.textContent = translations[currentLang].error;
-      DOM.riskBadge.className = "risk-badge risk-error";
-    }
-  } finally {
-    // Re-enable button
-    DOM.btn.disabled = false;
-    DOM.btnText.style.display = "inline";
-    DOM.btnLoading.style.display = "none";
-  }
-}
-
-// ========== APP INITIALIZATION ==========
 function initializeApp() {
-  console.log("=== INITIALIZING APP ===");
-  
-  // Initialize DOM references
-  initializeDOMReferences();
+  // Get DOM elements
+  const btn = document.getElementById("btn");
+  const btnText = document.querySelector(".btn-text");
+  const btnLoading = document.querySelector(".btn-loading");
+  const riskText = document.getElementById("riskText");
+  const riskBar = document.getElementById("riskBar");
+  const riskBadge = document.getElementById("riskBadge");
+  const errorText = document.getElementById("errorText");
+  const advice = document.getElementById("advice");
+  const explainDiv = document.getElementById("explain");
 
+  // Check if all required elements exist
+  console.log("DOM elements check:");
+  console.log("- btn:", !!btn);
+  console.log("- btnText:", !!btnText);
+  console.log("- btnLoading:", !!btnLoading);
+  console.log("- riskText:", !!riskText);
+  console.log("- riskBar:", !!riskBar);
+  console.log("- riskBadge:", !!riskBadge);
+  console.log("- errorText:", !!errorText);
+  console.log("- advice:", !!advice);
+  console.log("- explainDiv:", !!explainDiv);
 
+  // API endpoint - dynamically set based on environment
+  function getApiEndpoint() {
+    const currentPort = window.location.port;
+    const currentHost = window.location.hostname;
+
+    // If served from backend (port 8000), use relative URL
+    if (currentPort === '8000') {
+      return '/predict';
+    }
+
+    // If served from Live Server or other (port 5500, etc.), use full backend URL
+    return `http://${currentHost}:8001/predict`;
+  }
+
+  const API_ENDPOINT = getApiEndpoint();
+
+  // Utility function to check if a value is a finite number in [0,1]
+  function isValidProbability(value) {
+    return typeof value === "number" && isFinite(value) && value >= 0 && value <= 1;
+  }
+
+  // Utility function to safely convert to number, defaulting to 0
+  function safeToNumber(value, defaultValue = 0) {
+    const num = Number(value);
+    return isFinite(num) ? num : defaultValue;
+  }
+
+  // Utility function to safely get string value
+  function safeToString(value, defaultValue = "") {
+    return typeof value === "string" ? value : String(value || defaultValue);
+  }
+
+  function classifyRisk(p) {
+    const currentLang = document.documentElement.lang || 'en';
+    if (p < 0.33) return { 
+      label: i18n[currentLang].low_risk_label, 
+      badge: i18n[currentLang].low, 
+      color: "#2e7d32", 
+      cssClass: "risk-low" 
+    };
+    if (p < 0.66) return { 
+      label: i18n[currentLang].medium_risk_label, 
+      badge: i18n[currentLang].medium, 
+      color: "#ed6c02", 
+      cssClass: "risk-medium" 
+    };
+    return { 
+      label: i18n[currentLang].high_risk_label, 
+      badge: i18n[currentLang].high, 
+      color: "#d32f2f", 
+      cssClass: "risk-high" 
+    };
+  }
+
+  function setAdvice(p) {
+    const currentLang = document.documentElement.lang || 'en';
+    if (p < 0.33) return i18n[currentLang].low_risk_advice;
+    if (p < 0.66) return i18n[currentLang].medium_risk_advice;
+    return i18n[currentLang].high_risk_advice;
+  }
+
+  async function predict() {
+    console.log("predict() function called"); // Debug log
+
+    // Check if all required elements exist
+    if (!btn || !btnText || !btnLoading || !riskText || !riskBar || !riskBadge || !errorText || !advice || !explainDiv) {
+      console.error("Missing DOM elements!");
+      return;
+    }
+
+    errorText.style.display = "none";
+    btn.disabled = true;
+    btnText.style.display = "none";
+    btnLoading.style.display = "inline";
+    riskText.textContent = "…";
+    riskText.style.color = "";
+    riskBadge.textContent = i18n[document.documentElement.lang || 'en'].ready;
+    riskBadge.className = "risk-badge"; // Reset classes
+    riskBar.style.width = "0%";
+    riskBar.style.background = "#2f6fed";
+    advice.textContent = i18n[document.documentElement.lang || 'en'].calculating;
+    explainDiv.textContent = "";
+
+    const payload = {
+      road_type: document.getElementById("road_type").value,
+      weather: document.getElementById("weather").value,
+      time_of_day: document.getElementById("time_of_day").value,
+      lighting: document.getElementById("lighting").value,
+      junction: document.getElementById("junction").value,
+      road_surface: document.getElementById("road_surface").value
+    };
+
+    try {
+      console.log("About to fetch:", API_ENDPOINT, "with payload:", payload); // Debug log
+      const res = await fetch(API_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      if (!res.ok) {
+        let errorMessage = `HTTP ${res.status}`;
+        try {
+          const errorText = await res.text();
+          if (errorText) {
+            errorMessage += `: ${errorText}`;
+          }
+        } catch (textError) {
+          // Ignore text parsing errors
+        }
+        throw new Error(errorMessage);
+      }
+
+      let data;
+      try {
+        data = await res.json();
+      } catch (jsonError) {
+        throw new Error("Server returned invalid JSON response");
+      }
+
+      // Validate response structure
+      if (!data || typeof data !== "object") {
+        throw new Error("Server returned invalid response format");
+      }
+
+      // Validate and extract probability
+      const rawProbability = data.probability;
+      if (!isValidProbability(rawProbability)) {
+        throw new Error(`Server returned invalid probability: ${rawProbability}`);
+      }
+
+      const p = rawProbability;
+      const percent = Math.round(p * 100);
+
+      const cls = classifyRisk(p);
+
+      riskText.textContent = `${percent}% (${cls.label})`;
+      riskText.style.color = cls.color;
+
+      riskBadge.textContent = cls.badge;
+      riskBadge.className = `risk-badge ${cls.cssClass}`;
+
+      riskBar.style.width = `${percent}%`;
+      riskBar.style.background = cls.color;
+
+      advice.textContent = setAdvice(p);
+
+      // Defensive breakdown rendering
+      const breakdown = Array.isArray(data.breakdown) ? data.breakdown : [];
+      if (breakdown.length > 0) {
+        lastBreakdownData = breakdown; // Store for language switching
+        renderBreakdown(breakdown);
+      }
+    } catch (e) {
+      console.error("Prediction error:", e);
+
+      // Determine error type and show appropriate message
+      let userMessage = i18n[document.documentElement.lang || 'en'].error_prediction;
+      let errorType = 'unknown';
+
+      if (e.name === 'TypeError' && e.message.includes('fetch')) {
+        // Network/connection error
+        userMessage = i18n[document.documentElement.lang || 'en'].network_error;
+        errorType = 'network';
+        console.error("Network error - likely backend server not running or CORS issue");
+      } else if (e.message.includes('HTTP')) {
+        // Server returned error status
+        userMessage = i18n[document.documentElement.lang || 'en'].server_error;
+        errorType = 'server';
+        console.error("Server error - check backend logs");
+      } else if (e.message.includes('JSON') || e.message.includes('invalid')) {
+        // Invalid response format
+        userMessage = i18n[document.documentElement.lang || 'en'].invalid_response;
+        errorType = 'response';
+        console.error("Invalid response format from server");
+      }
+
+      console.error(`Error type: ${errorType}, User message: ${userMessage}`);
+
+      errorText.style.display = "block";
+      advice.textContent = userMessage;
+      riskBadge.textContent = i18n[document.documentElement.lang || 'en'].error;
+      riskBadge.className = "risk-badge risk-error";
+    } finally {
+      btn.disabled = false;
+      btnText.style.display = "inline";
+      btnLoading.style.display = "none";
+    }
+  }
 
   // Initialize language
   initializeLanguage();
@@ -686,19 +546,18 @@ function initializeApp() {
     });
   });
 
-  // Attach event listener to predict button
-  if (DOM.btn) {
-    DOM.btn.addEventListener("click", function(event) {
-      event.preventDefault();
-      console.log("Predict button clicked!");
+  // Attach event listener only if button exists
+  if (btn) {
+    btn.addEventListener("click", function(event) {
+      event.preventDefault(); // Prevent any default form submission
+      console.log("Predict button clicked!"); // Debug log
       predict();
     });
-    console.log("Predict button event listener attached");
   } else {
-    console.error("Predict button not found!");
+    console.error("Button with id 'btn' not found!");
   }
 
-  console.log("=== APP INITIALIZED SUCCESSFULLY ===");
+  console.log("script.js loaded and initialized");
 }
 
 // Check if DOM is already loaded (since script is loaded at end of body)
