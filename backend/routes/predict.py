@@ -24,6 +24,9 @@ def predict(req: PredictRequest):
         response = ModelResult(**result)
         logger.info(f"=== PREDICTION SUCCESS ===")
         return response
+    except ValueError as e:
+        logger.warning(f"Invalid prediction input: {e}")
+        raise HTTPException(status_code=422, detail=str(e))
     except Exception as e:
         logger.exception("Error occurred during prediction")
         raise HTTPException(status_code=500, detail="Internal server error")

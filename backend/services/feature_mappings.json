@@ -1,0 +1,210 @@
+{
+  "feature_order": [
+    "SHAA",
+    "HODESH_TEUNA",
+    "YOM_BASHAVUA",
+    "SUG_TEUNA",
+    "ROAD_STRUCTURE",
+    "ROHAV",
+    "NAFA",
+    "ZURAT_ISHUV",
+    "MEHIRUT_MUTERET",
+    "TEURA",
+    "SUG_DEREH",
+    "SIMUN_TIMRUR",
+    "TKINUT",
+    "PNE_KVISH",
+    "MEZEG_AVIR",
+    "YOM_LAYLA"
+  ],
+  "features": {
+    "SHAA": {
+      "mapping": {
+        "00:00": 0,
+        "01:00": 1,
+        "02:00": 2,
+        "03:00": 3,
+        "04:00": 4,
+        "05:00": 5,
+        "06:00": 6,
+        "07:00": 7,
+        "08:00": 8,
+        "09:00": 9,
+        "10:00": 10,
+        "11:00": 11,
+        "12:00": 12,
+        "13:00": 13,
+        "14:00": 14,
+        "15:00": 15,
+        "16:00": 16,
+        "17:00": 17,
+        "18:00": 18,
+        "19:00": 19,
+        "20:00": 20,
+        "21:00": 21,
+        "22:00": 22,
+        "23:00": 23,
+        "לא ידוע": 0
+      },
+      "description": "Hour of day"
+    },
+    "HODESH_TEUNA": {
+      "mapping": {
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
+        "6": 6,
+        "7": 7,
+        "8": 8,
+        "9": 9,
+        "10": 10,
+        "11": 11,
+        "12": 12,
+        "לא ידוע": 0
+      },
+      "description": "Month of accident"
+    },
+    "YOM_BASHAVUA": {
+      "mapping": {
+        "לא ידוע": 0,
+        "ראשון": 1,
+        "שני": 2,
+        "שלישי": 3,
+        "רביעי": 4,
+        "חמישי": 5,
+        "שישי": 6,
+        "שבת": 7
+      },
+      "description": "Day of week"
+    },
+    "SUG_TEUNA": {
+      "mapping": {
+        "לא ידוע": 0,
+        "חזיתי": 1,
+        "אחורי": 2,
+        "צדדי": 3,
+        "הולך רגל": 4
+      },
+      "description": "Accident type"
+    },
+    "ROAD_STRUCTURE": {
+      "mapping": {
+        "לא ידוע": 0,
+        "חד-כיווני": 1,
+        "דו-כיווני": 2,
+        "רב-נתיבים דו-כיווני": 3,
+        "רב-נתיבים חד-כיווני": 4
+      },
+      "description": "Road structure"
+    },
+    "ROHAV": {
+      "mapping": {
+        "לא ידוע": 0,
+        "צר (עד 6.5 מ')": 1,
+        "בינוני (6.5-8 מ')": 2,
+        "רחב (מעל 8 מ')": 3
+      },
+      "description": "Road width"
+    },
+    "NAFA": {
+      "mapping": {
+        "לא ידוע": 0,
+        "מרכז": 1,
+        "צפון": 2,
+        "דרום": 3,
+        "ירושלים": 4,
+        "חיפה": 5
+      },
+      "description": "Administrative region / district"
+    },
+    "ZURAT_ISHUV": {
+      "mapping": {
+        "לא ידוע": 0,
+        "עירוני": 1,
+        "כפרי": 2,
+        "כביש ראשי": 3
+      },
+      "description": "Settlement form"
+    },
+    "MEHIRUT_MUTERET": {
+      "mapping": {
+        "לא ידוע": 0,
+        "עד 50 קמ״ש": 1,
+        "עד 60 קמ״ש": 2,
+        "עד 70 קמ״ש": 3,
+        "עד 80 קמ״ש": 4,
+        "עד 90 קמ״ש": 5,
+        "עד 100 קמ״ש": 6,
+        "עד 110 קמ״ש": 7,
+        "עד 120 קמ״ש": 8
+      },
+      "description": "Speed limit"
+    },
+    "TEURA": {
+      "mapping": {
+        "לא ידוע": 0,
+        "אור יום": 1,
+        "לילה עם תאורה": 2,
+        "לילה ללא תאורה": 3
+      },
+      "description": "Lighting"
+    },
+    "SUG_DEREH": {
+      "mapping": {
+        "לא ידוע": 0,
+        "עירוני בצומת": 1,
+        "עירוני לא בצומת": 2,
+        "לא עירוני בצומת": 3,
+        "לא עירוני לא בצומת": 4
+      },
+      "description": "Road type"
+    },
+    "SIMUN_TIMRUR": {
+      "mapping": {
+        "לא ידוע": 0,
+        "בעל רמזור": 1,
+        "בעל תמרור": 2,
+        "ללא סימונים": 3
+      },
+      "description": "Traffic marking"
+    },
+    "TKINUT": {
+      "mapping": {
+        "לא ידוע": 0,
+        "תקין": 1,
+        "לא תקין": 2
+      },
+      "description": "Road condition / road validity"
+    },
+    "PNE_KVISH": {
+      "mapping": {
+        "לא ידוע": 0,
+        "יבש": 1,
+        "רטוב ממים": 2,
+        "מרוח בחומר דלק": 3,
+        "מכוסה בבוץ": 4
+      },
+      "description": "Road surface"
+    },
+    "MEZEG_AVIR": {
+      "mapping": {
+        "לא ידוע": 0,
+        "בהיר": 1,
+        "מעונן": 2,
+        "גשום": 3,
+        "ערפילי": 4
+      },
+      "description": "Weather"
+    },
+    "YOM_LAYLA": {
+      "mapping": {
+        "לא ידוע": 0,
+        "יום": 1,
+        "לילה": 2
+      },
+      "description": "Day or night"
+    }
+  }
+}
