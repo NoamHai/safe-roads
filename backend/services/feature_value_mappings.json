@@ -13,6 +13,7 @@
     "november": 11,
     "december": 12
   },
+
   "YOM_BASHAVUA": {
     "sunday": 1,
     "monday": 2,
@@ -22,12 +23,14 @@
     "friday": 6,
     "saturday": 7
   },
+
   "SUG_TEUNA": {
     "collision": 1,
     "pedestrian": 2,
     "single_vehicle": 3,
     "other": 99
   },
+
   "ROAD_STRUCTURE": {
     "single_lane_1": "HAD_1",
     "single_lane_2": "HAD_2",
@@ -38,23 +41,14 @@
     "multi_lane_4": "RAV_4",
     "other": "OTHER"
   },
+
   "ROHAV": {
     "narrow": 1,
     "medium": 2,
     "wide": 3,
     "other": 99
   },
-  "NAFA": {
-    "jerusalem": 11,
-    "haifa": 31,
-    "tel_aviv": 51,
-    "other": 99
-  },
-  "ZURAT_ISHUV": {
-    "urban": 1,
-    "rural": 2,
-    "other": 99
-  },
+
   "MEHIRUT_MUTERET": {
     "30": 30,
     "50": 50,
@@ -64,43 +58,120 @@
     "100": 100,
     "110": 110
   },
+
   "TEURA": {
     "daylight": 1,
     "dark_lit": 2,
     "dark_unlit": 3,
     "other": 99
   },
+
   "SUG_DEREH": {
     "urban_road": 1,
     "non_urban_road": 2,
     "intersection": 3,
     "other": 99
   },
+
   "SIMUN_TIMRUR": {
     "proper": 1,
     "missing": 2,
     "not_relevant": 9,
     "other": 99
   },
+
   "TKINUT": {
     "normal": 1,
     "defective": 2,
     "other": 99
   },
+
   "PNE_KVISH": {
     "dry": 1,
     "wet": 2,
     "muddy": 3,
     "other": 99
   },
+
   "MEZEG_AVIR": {
     "clear": 1,
     "rainy": 2,
     "foggy": 3,
     "other": 99
   },
+
   "YOM_LAYLA": {
     "day": 1,
     "night": 2
+  },
+
+  "ZURAT_ISHUV": {
+    "urban_refugee_camps": 9,
+
+    "jewish_city_500k_plus": 12,
+    "jewish_city_200k_500k": 13,
+    "jewish_city_100k_200k": 14,
+    "jewish_city_50k_100k": 15,
+    "jewish_city_20k_50k": 16,
+    "jewish_city_10k_20k": 17,
+    "jewish_city_5k_10k": 18,
+    "jewish_city_2k_5k": 19,
+
+    "non_jewish_city_50k_100k": 25,
+    "non_jewish_city_20k_50k": 26,
+    "non_jewish_city_10k_20k": 27,
+    "non_jewish_city_5k_10k": 28,
+    "non_jewish_city_2k_5k": 29,
+
+    "moshav": 31,
+    "moshav_shitufi": 32,
+    "kibbutz": 33,
+
+    "jewish_institutional_settlement": 34,
+    "other_jewish_rural_settlement": 35,
+    "community_settlement": 37,
+
+    "non_jewish_institutional_settlement": 44,
+    "other_non_jewish_rural_settlement": 45,
+
+    "bedouin_tribes": 46,
+    "rural_settlement": 49,
+
+    "unclassified_place": 51,
+    "employment_center": 52,
+    "other_kibbutz_area": 53,
+
+    "rural_refugee_camps": 59
+  },
+
+  "NAFA": {
+    "unknown": 0,
+    "jerusalem": 11,
+    "zefat": 21,
+    "kinneret": 22,
+    "yizreel": 23,
+    "akko": 24,
+    "golan": 29,
+    "haifa": 31,
+    "hadera": 32,
+    "hasharon": 41,
+    "petah_tikva": 42,
+    "ramla": 43,
+    "rehovot": 44,
+    "tel_aviv": 51,
+    "ashkelon": 61,
+    "beer_sheva": 62,
+    "jenin": 71,
+    "nablus": 72,
+    "tulkarm": 73,
+    "ramallah": 74,
+    "jordan_jericho": 75,
+    "bethlehem": 76,
+    "hebron": 77,
+    "rafah": 80,
+    "gaza": 81,
+    "khan_yunis": 82,
+    "jabalia": 86,
+    "deir_al_balah": 87
   }
 }
